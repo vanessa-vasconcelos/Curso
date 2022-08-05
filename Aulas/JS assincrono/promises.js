@@ -6,17 +6,25 @@ function rand(max, min) {
 
 function esperaAi(msg, tempo) {
     return new Promise((resolve, reject) => {
+        if(typeof msg !== 'string') reject('BAD VALUE')
         setTimeout(() => {
             resolve(msg);
         }, tempo)
     })
 }
 
+//then executa resolve e catch executa o reject
 esperaAi('Frase 1', rand(1, 3))
 .then(resposta => {
     console.log(resposta);
     return esperaAi('Frase 2', rand(1, 3));
 }).then(resposta => {
     console.log(resposta)
+    return esperaAi(22222, rand(1, 3));
 })
-.catch() //then executa resolve e catch executa o reject
+.then(resposta => {
+    console.log(resposta);
+})
+.catch(e => {  // catch é para erro
+    console.log('EERO', e);
+})
